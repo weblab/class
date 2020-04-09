@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>开学倒计时</title>
+	</head>
+	<body>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+		<script>
+			Swal.fire({
+				title: '离开学时间不多了!',
+				icon: 'warning',
+				html: '<span id="timer"></span>'+'开学',
+				allowEscapeKey:false,
+				showConfirmButton:false,
+				allowOutsideClick:false,
+			})
+		</script>
+		<script>
+			var endDate = new Date(2020, 3, 20, 00, 00, 00); //年月日时分秒，月要减去1
+			daoJiShi();
+			function daoJiShi() {
+				var now = new Date();
+				var oft = Math.round((endDate - now) / 1000);
+				var ofd = parseInt(oft / 3600 / 24);
+				var ofh = parseInt((oft % (3600 * 24)) / 3600);
+				var ofm = parseInt((oft % 3600) / 60);
+				var ofs = oft % 60;
+				document.getElementById('timer').innerHTML = '还有 ' + ofd + ' 天 ' + ofh + ' 小时 ' + ofm + ' 分钟 ' + ofs + ' 秒';
+				if (ofs < 0) {
+					document.getElementById('timer').innerHTML = '开学啦!';
+					return;
+				};
+				setTimeout('daoJiShi()', 1000);
+			}
+			setTimeout('daoJiShi()', 1000);
+		</script>
+	</body>
+</html>
